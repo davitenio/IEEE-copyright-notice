@@ -1,5 +1,14 @@
 #!/bin/bash
 
+usage() {
+	echo "Usage: $0 PDF YEAR DOI"
+}
+
+if [ ! $# == 3 ]; then
+	usage
+	exit 1
+fi
+
 FILE=$1
 YEAR=$2
 DOI=$3
