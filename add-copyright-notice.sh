@@ -1,10 +1,11 @@
 #!/bin/bash
 
 usage() {
-	echo "Usage: $0 PDF YEAR DOI"
+	echo "Usage: $0 PDF YEAR [DOI]"
+	echo "DOI is an optional parameter"
 }
 
-if [ ! $# == 3 ]; then
+if [ ! $# == 3 -a ! $# == 2 ]; then
 	usage
 	exit 1
 fi
@@ -13,7 +14,11 @@ FILE=$1
 YEAR=$2
 DOI=$3
 
-sed -e "s/YEAR/$YEAR/" -e "s#DOI#$DOI#" copyMark.tex > copyMarkTmp.tex
+if [ -z $DOI ]; then
+	sed -e "s/YEAR/$YEAR/" -e "s#DOI##" copyMark.tex > copyMarkTmp.tex
+else
+	sed -e "s/YEAR/$YEAR/" -e "s#DOI#doi: $DOI#" copyMark.tex > copyMarkTmp.tex
+fi
 
 y=${FILE%.pdf}
 
