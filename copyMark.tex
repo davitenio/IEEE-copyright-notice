@@ -1,0 +1,39 @@
+%
+% copyMark.tex
+%
+% Create a single page containing only a copyright claim in the top
+% margin. Can be applied on existing documents by
+% to all pages:
+% pdftk document.pdf stamp copyMark.pdf output document_stamp.pdf
+% to the first page only:
+% pdftk document.pdf cat 1 output - | pdftk - stamp copyMark.pdf output - | pdftk A=- B=document.pdf cat A1 B2-end output document_copy.pdf
+%
+% Jouni Paulus, jouni.paulus(a)tut.fi, 11.11.2009
+%
+
+\documentclass[a4paper,english,9pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{pslatex} % needed for fonts
+\usepackage[latin1]{inputenc}
+\usepackage{babel}
+
+%\usepackage[left=0.5cm,top=.1cm,right=1cm,bottom=1cm,nohead]{geometry}
+\usepackage[left=1.75cm,top=27.5cm,right=2.25cm,bottom=1cm,nohead]{geometry}
+%\usepackage[left=1.0cm,top=0.5cm,right=0.5cm,bottom=1cm,nohead]{geometry}
+
+%\usepackage[left=1.4cm,top=27.5cm,right=2.5cm,bottom=1cm,nohead]{geometry}
+%\usepackage[left=1.75cm,top=26.5cm,right=2.5cm,bottom=1cm,nohead]{geometry}
+%\usepackage[left=2.5cm,top=26.5cm,right=2.5cm,bottom=1cm,nohead]{geometry}
+
+\begin{document}
+
+\setlength{\parindent}{0in}
+
+\thispagestyle{empty}
+%\begin{center}
+\footnotesize
+\copyright YEAR IEEE. Personal use of this material is permitted. Permission from IEEE must be obtained for all other uses, in any current or future media, including reprinting/republishing this material for advertising or promotional purposes, creating new collective works, for resale or redistribution to servers or lists, or reuse of any copyrighted component of this work in other works. doi:DOI
+%\end{center}
+
+\end{document}
