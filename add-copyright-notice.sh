@@ -14,16 +14,16 @@ FILE=$1
 YEAR=$2
 DOI=$3
 
+TMPTEX="$(mktemp)"
+
 if [ -z $DOI ]; then
-	sed -e "s/YEAR/$YEAR/" -e "s#DOI##" copyMark.tex > copyMarkTmp.tex
+	sed -e "s/YEAR/$YEAR/" -e "s#DOI##" copyMark.tex > $TMPTEX
 else
-	sed -e "s/YEAR/$YEAR/" -e "s#DOI#doi: $DOI#" copyMark.tex > copyMarkTmp.tex
+	sed -e "s/YEAR/$YEAR/" -e "s#DOI#doi: $DOI#" copyMark.tex > $TMPTEX
 fi
 
 y=${FILE%.pdf}
 
-pdflatex copyMarkTmp.tex
+pdflatex $TMPTEX
 
-pdftk $FILE cat 1 output - | pdftk - stamp copyMarkTmp.pdf output - | pdftk A=- B=$FILE cat A1 B2-end output ${y}_copy.pdf
-
-rm copyMarkTmp.tex
+pdftk $FILE cat 1 output - | pdftk - stamp tmp.pdf output - | pdftk A=- B=$FILE cat A1 B2-end output ${y}_copy.pdf
